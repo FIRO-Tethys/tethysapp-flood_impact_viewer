@@ -1,0 +1,11 @@
+#collapseExample {
+   position:absolute;
+   background-color: white;
+   width:100%;
+   bottom: 50px;
+   z-index: 10;
+}
+
+#app_navigation_items {
+   padding-top: 20px;
+}

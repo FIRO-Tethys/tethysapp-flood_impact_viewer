@@ -1,0 +1,60 @@
+{% extends "flood_impact_viewer/base.html" %}
+{% load tethys_gizmos %}
+{% load tethys_gizmos static %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'flood_impact_viewer/css/map.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block app_navigation_items %}
+  <li class='title'>Select Data</li>
+  {% gizmo region_select %}
+{% endblock %}
+
+{% block app_content %}
+  <!-- removed map_view (possibly caused circular reference) -->
+  {% gizmo map_options %}
+  <!-- {% gizmo map_view map_options %} -->
+
+  <div class="collapse" id="collapseExample">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Agriculture [Hect]</th>
+          <th>Population</th>
+          <th>Educational Fac.</th>
+          <th>Entertainment Fac.</th>
+          <th>Financial Fac.</th>
+          <th>Food Fac.</th>
+          <th>Health Care Fac.</th>
+          <th>Public Service Amen.</th>
+          <th>Transportation</th>
+          <th>Waste Management Amen</th>
+          <th>Other Fac.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{flood_impact.0.0}}</td>
+          <td>{{flood_impact.0.1}}</td>
+          <td>{{flood_impact.0.2}}</td>
+          <td>{{flood_impact.0.3}}</td>
+          <td>{{flood_impact.0.4}}</td>
+          <td>{{flood_impact.0.5}}</td>
+          <td>{{flood_impact.0.6}}</td>
+          <td>{{flood_impact.0.7}}</td>
+          <td>{{flood_impact.0.8}}</td>
+          <td>{{flood_impact.0.9}}</td>
+          <td>{{flood_impact.0.10}}</td>
+          <td>{{flood_impact.0.11}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}
+
+{% block app_actions %}
+
+{% endblock %}
