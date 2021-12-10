@@ -63,22 +63,29 @@ def init_flood_impact_db(engine, first_time):
          #ADD THE DATA TO THE DATABASE
          session.add(impact_data)
       #-----------------FLOOD MAP------------------------------
-      flood_map_dir = os.path.dirname(__file__)
+      flood_maps_dir = os.path.dirname(__file__)
 
-      flood_map_path = os.path.join(
-         flood_map_dir, 'data', 'Chazuta_HAND_10m.geojson'
+      flood_maps_path = os.path.join(
+         flood_maps_dir, 'data','flood_maps'
       )
 
+      flood_map_files = None
+      flood_map_files = os.listdir(flood_maps_path)
+      print(flood_map_files[1])
+      print(flood_map_files[2])
       flood_map = None
 
-      with open(flood_map_path, 'r') as f:
-         flood_map = f.read()
+      for i in range(1,len(flood_map_files)):
+         flood_extent = os.path.join(flood_maps_path, flood_map_files[i])
+         with open(flood_extent, 'r') as f:
+            flood_map = f.read()
 
-      chazuta_flood_map = Flood_Map(
-         geometry=flood_map,
-         map_id = 1
-      )
-      session.add(chazuta_flood_map)
+         chazuta_flood_map = Flood_Map(
+            geometry=flood_map,
+            map_id = i
+         )
+         i += 1
+         session.add(chazuta_flood_map)
       #--------------End Flood Map----------------------------
       #COMMIT THE CHANGES TO THE DB
       session.commit()
