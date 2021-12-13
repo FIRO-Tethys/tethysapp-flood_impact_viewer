@@ -71,8 +71,6 @@ def init_flood_impact_db(engine, first_time):
 
       flood_map_files = None
       flood_map_files = os.listdir(flood_maps_path)
-      print(flood_map_files[1])
-      print(flood_map_files[2])
       flood_map = None
 
       for i in range(1,len(flood_map_files)):
