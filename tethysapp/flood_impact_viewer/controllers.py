@@ -16,21 +16,6 @@ def home(request):
 
     flood_impact = session.query(Impact_Data.Agriculture_hectares, Impact_Data.Population, Impact_Data.Education_facil, Impact_Data.Entertainment_facil, Impact_Data.Financial_facil, Impact_Data.Food_facil, Impact_Data.Healthcare_facil, Impact_Data.Other_facil, Impact_Data.Public_service_amenity, Impact_Data.Transportation, Impact_Data.Waste_management_amenity).all()
 
-    # flood_extent_feature = {
-    #     'type': 'Feature',
-    #     'geometry': json.loads(flood_extent[0])
-    # }
-
-    # geojson_flood_extent = {
-    #     'type': 'FeatureCollection',
-    #     'crs': {
-    #         'type': 'name',
-    #         'properties': {
-    #             'name': 'EPSG:4326'
-    #         }
-    #     },
-    #     'features': [flood_extent_feature]
-    # }
     flood_extents = session.query(Flood_Map.geometry, Flood_Map.id).all()
     layers = []
     for flood_extent in flood_extents:
@@ -49,13 +34,6 @@ def home(request):
         center=[-76.1357, -6.5724088],
         zoom=13
     )
-    # base_map = MapView(
-    #     height='100%',
-    #     width='100%',
-    #     layers=[],
-    #     basemap='OpenStreetMap',
-    #     view=initial_view
-    # )
 
      # Define the map
     map_options = MapView(
@@ -68,17 +46,38 @@ def home(request):
         legend=True
     )
 
+    countries = session.query(Impact_Data.country).all()
+    countryList = []
+    for i in range (len(countries)):
+        if (countries[i][0].upper(), countries[i][0].upper()) not in countryList:
+            countryList.append((countries[i][0].upper(), countries[i][0].upper()))
+
+    country_select = SelectInput (
+        name='Country',
+        display_text='Country',
+        options=countryList,
+    )
+
+    province_select = SelectInput (
+        name='Province',
+        display_text='Province',
+    )
+
     region_select = SelectInput (
         name='Region',
-        display_text='Region of interest',
+        display_text='Region',
     )
 
     context = {
         # 'base_map': base_map,
         'map_options': map_options,
-        'region_select': region_select,
-        'flood_impact': flood_impact
+        'country_select': country_select,
+        'flood_impact': flood_impact,
+        'province_select': province_select,
+        'region_select': region_select
     }
+
+    session.close()
 
     return render(request, 'flood_impact_viewer/home.html', context)
 

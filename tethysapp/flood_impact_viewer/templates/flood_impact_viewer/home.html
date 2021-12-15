@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block app_navigation_items %}
-  <li class='title'>Select Data</li>
+  <li class='title'>SELECT DATA</li>
+  {% gizmo country_select %}
+  {% gizmo province_select %}
   {% gizmo region_select %}
 {% endblock %}
 
