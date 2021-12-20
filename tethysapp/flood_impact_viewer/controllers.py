@@ -58,9 +58,29 @@ def home(request):
         options=countryList,
     )
 
+    # provinces = session.query(Impact_Data.province).all()
+    # provinceDict = {}
+    # provinceList = []
+    # for i in range (len(provinces)):
+    #     if countries[i][0] not in provinceDict:
+    #         prov = provinces[i][0]
+    #         provinceDict[countries[i][0]] = prov
+    #     if (provinces[i][0].upper(), provinces[i][0]) not in provinceList:
+    #         prov = provinces[i][0]
+    #         provinceList.append((prov.upper(), prov))
+    # print(provinceDict)
+
+    cntr_provs = session.query(Impact_Data.country, Impact_Data.province).all()
+    provDict = {}
+    for tup in cntr_provs:
+        if tup[0] not in provDict:
+            provDict[tup[0]] = tup[1]
+    print(provDict)
+
     province_select = SelectInput (
         name='Province',
         display_text='Province',
+        attributes=provDict
     )
 
     region_select = SelectInput (
