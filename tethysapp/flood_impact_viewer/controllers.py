@@ -47,15 +47,16 @@ def home(request):
     )
 
     countries = session.query(Impact_Data.country).all()
-    countryList = []
+    countryList = [('','')]
     for i in range (len(countries)):
-        if (countries[i][0].upper(), countries[i][0].upper()) not in countryList:
-            countryList.append((countries[i][0].upper(), countries[i][0].upper()))
+        if (countries[i][0], countries[i][0].upper()) not in countryList:
+            countryList.append((countries[i][0], countries[i][0].upper()))
 
     country_select = SelectInput (
         name='Country',
         display_text='Country',
         options=countryList,
+        initial='',
     )
 
     # provinces = session.query(Impact_Data.province).all()
@@ -72,14 +73,18 @@ def home(request):
 
     cntr_provs = session.query(Impact_Data.country, Impact_Data.province).all()
     provDict = {}
+    provList = []
+    i = 0
     for tup in cntr_provs:
-        if tup[0] not in provDict:
-            provDict[tup[0]] = tup[1]
-    print(provDict)
+        if tup not in provDict.values():
+            provDict[i] = tup
+            print(i, tup)
+            i += 1
 
     province_select = SelectInput (
         name='Province',
         display_text='Province',
+        options=provList,
         attributes=provDict
     )
 
