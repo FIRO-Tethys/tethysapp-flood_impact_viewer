@@ -9,3 +9,11 @@
 #app_navigation_items {
    padding-top: 20px;
 }
+
+#form-group-Province{
+   display: none;
+}
+
+#form-group-Region{
+   display:none
+}

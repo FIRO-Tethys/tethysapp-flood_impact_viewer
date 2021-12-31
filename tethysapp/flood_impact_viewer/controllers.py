@@ -73,11 +73,12 @@ def home(request):
 
     cntr_provs = session.query(Impact_Data.country, Impact_Data.province).all()
     provDict = {}
-    provList = []
+    provList = [('','')]
     i = 0
     for tup in cntr_provs:
         if tup not in provDict.values():
             provDict[i] = tup
+            provList.append((tup[1], tup[1].upper()))
             print(i, tup)
             i += 1
 
@@ -85,7 +86,9 @@ def home(request):
         name='Province',
         display_text='Province',
         options=provList,
-        attributes=provDict
+        attributes=provDict,
+        initial='',
+        # classes='hidden',
     )
 
     region_select = SelectInput (
