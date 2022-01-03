@@ -47,7 +47,7 @@ def home(request):
     )
 
     countries = session.query(Impact_Data.country).all()
-    countryList = [('','')]
+    countryList = [('Select a Country','Select a Country')]
     for i in range (len(countries)):
         if (countries[i][0], countries[i][0].upper()) not in countryList:
             countryList.append((countries[i][0], countries[i][0].upper()))
@@ -56,24 +56,12 @@ def home(request):
         name='Country',
         display_text='Country',
         options=countryList,
-        initial='',
+        initial='Select a Country',
     )
-
-    # provinces = session.query(Impact_Data.province).all()
-    # provinceDict = {}
-    # provinceList = []
-    # for i in range (len(provinces)):
-    #     if countries[i][0] not in provinceDict:
-    #         prov = provinces[i][0]
-    #         provinceDict[countries[i][0]] = prov
-    #     if (provinces[i][0].upper(), provinces[i][0]) not in provinceList:
-    #         prov = provinces[i][0]
-    #         provinceList.append((prov.upper(), prov))
-    # print(provinceDict)
 
     cntr_provs = session.query(Impact_Data.country, Impact_Data.province).all()
     provDict = {}
-    provList = [('','')]
+    provList = [('Select a Province','Select a Province')]
     i = 0
     for tup in cntr_provs:
         if tup not in provDict.values():
@@ -87,13 +75,27 @@ def home(request):
         display_text='Province',
         options=provList,
         attributes=provDict,
-        initial='',
-        # classes='hidden',
+        initial='Select a Province',
     )
+
+    provs_regions = session.query(Impact_Data.province, Impact_Data.region).all()
+    regsDict = {}
+    regsList = [('Select a Region','Select a Region')]
+    i = 0
+    for tup in provs_regions:
+        if tup not in regsDict.values():
+            regsDict[i] = tup
+            regsList.append((tup[1], tup[1].upper()))
+            print(i, tup)
+            i += 1
+
 
     region_select = SelectInput (
         name='Region',
         display_text='Region',
+        options=regsList,
+        attributes=regsDict,
+        initial='Select a Region',
     )
 
     context = {
