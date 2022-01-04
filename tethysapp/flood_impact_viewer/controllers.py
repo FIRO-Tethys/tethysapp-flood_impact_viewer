@@ -72,7 +72,7 @@ def home(request):
 
     province_select = SelectInput (
         name='Province',
-        display_text='Province',
+        display_text='Province / State',
         options=provList,
         attributes=provDict,
         initial='Select a Province',
@@ -89,22 +89,88 @@ def home(request):
             print(i, tup)
             i += 1
 
-
     region_select = SelectInput (
         name='Region',
-        display_text='Region',
+        display_text='Region / City',
         options=regsList,
         attributes=regsDict,
         initial='Select a Region',
     )
 
+    flood_map_type = SelectInput (
+        name='Flood_Map_Type',
+        display_text='Flood Map Type',
+        options=[('Select a Flood Map Type', 'Select a Flood Map Type'),('Return Period', 'Return Period'), ('Flood Date','Flood Date'), ('Flow Rate','Flow Rate')],
+        initial='Select a Flood Map Type',
+    )
+
+    provs_regs_returnPeriods = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.return_period).all()
+    returnPeriodsDict = {}
+    returnPeriodList = [('Select a Return Period','Select a Return Period')]
+    i = 0
+    for tup in provs_regs_returnPeriods:
+        if tup not in returnPeriodsDict.values():
+            returnPeriodsDict[i] = tup
+            returnPeriodList.append((tup[2], tup[2].upper()))
+            print(i, tup)
+            i += 1
+
+    return_period_select = SelectInput (
+        name='Return_Period',
+        display_text='Return Period',
+        options=returnPeriodList,
+        attributes=returnPeriodsDict,
+        initial='Select a Return Period',
+    )
+
+    provs_regs_flowRate = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.flow_rate_cms).all()
+    flowRateDict = {}
+    flowRateList = [('Select a Flow Rate','Select a Flow Rate')]
+    i = 0
+    for tup in provs_regs_flowRate:
+        if tup not in flowRateDict.values():
+            flowRateDict[i] = tup
+            flowRateList.append((tup[2], tup[2].upper()))
+            print(i, tup)
+            i += 1
+
+    flow_rate_select = SelectInput (
+        name='Flow_Rate',
+        display_text='Flow Rate',
+        options=flowRateList,
+        attributes=flowRateDict,
+        initial='Select a Flow Rate',
+    )
+
+    provs_regs_floodDate = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.flood_date).all()
+    floodDateDict = {}
+    floodDateList = [('Select a Flood Date','Select a Flood Date')]
+    i = 0
+    for tup in provs_regs_floodDate:
+        if tup not in floodDateDict.values():
+            floodDateDict[i] = tup
+            floodDateList.append((tup[2], tup[2].upper()))
+            print(i, tup)
+            i += 1
+
+    flood_date_select = SelectInput (
+        name='Flood_Date',
+        display_text='Flood Date',
+        options=floodDateList,
+        attributes=floodDateDict,
+        initial='Select a Flood Date',
+    )
     context = {
         # 'base_map': base_map,
         'map_options': map_options,
         'country_select': country_select,
         'flood_impact': flood_impact,
         'province_select': province_select,
-        'region_select': region_select
+        'region_select': region_select,
+        'flood_map_type': flood_map_type,
+        'return_period_select': return_period_select,
+        'flow_rate_select': flow_rate_select,
+        'flood_date_select': flood_date_select,
     }
 
     session.close()
