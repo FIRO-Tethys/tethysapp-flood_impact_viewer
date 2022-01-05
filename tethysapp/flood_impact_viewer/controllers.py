@@ -67,7 +67,6 @@ def home(request):
         if tup not in provDict.values():
             provDict[i] = tup
             provList.append((tup[1], tup[1].upper()))
-            print(i, tup)
             i += 1
 
     province_select = SelectInput (
@@ -86,7 +85,6 @@ def home(request):
         if tup not in regsDict.values():
             regsDict[i] = tup
             regsList.append((tup[1], tup[1].upper()))
-            print(i, tup)
             i += 1
 
     region_select = SelectInput (
@@ -109,10 +107,9 @@ def home(request):
     returnPeriodList = [('Select a Return Period','Select a Return Period')]
     i = 0
     for tup in provs_regs_returnPeriods:
-        if tup not in returnPeriodsDict.values():
+        if tup[2] != 'None' and tup not in returnPeriodsDict.values():
             returnPeriodsDict[i] = tup
             returnPeriodList.append((tup[2], tup[2].upper()))
-            print(i, tup)
             i += 1
 
     return_period_select = SelectInput (
@@ -128,10 +125,9 @@ def home(request):
     flowRateList = [('Select a Flow Rate','Select a Flow Rate')]
     i = 0
     for tup in provs_regs_flowRate:
-        if tup not in flowRateDict.values():
+        if tup[2] != 'None' and  tup not in flowRateDict.values():
             flowRateDict[i] = tup
             flowRateList.append((tup[2], tup[2].upper()))
-            print(i, tup)
             i += 1
 
     flow_rate_select = SelectInput (
@@ -147,10 +143,9 @@ def home(request):
     floodDateList = [('Select a Flood Date','Select a Flood Date')]
     i = 0
     for tup in provs_regs_floodDate:
-        if tup not in floodDateDict.values():
+        if tup[2] != 'None' and tup not in floodDateDict.values():
             floodDateDict[i] = tup
             floodDateList.append((tup[2], tup[2].upper()))
-            print(i, tup)
             i += 1
 
     flood_date_select = SelectInput (
