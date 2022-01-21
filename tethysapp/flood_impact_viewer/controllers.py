@@ -111,6 +111,7 @@ def home(request):
             returnPeriodsDict[i] = tup
             returnPeriodList.append((tup[2], tup[2].upper()))
             i += 1
+            print(returnPeriodsDict.values())
 
     return_period_select = SelectInput (
         name='Return_Period',

@@ -20,7 +20,7 @@ def init_flood_impact_db(engine, first_time):
       impact_data_dir = os.path.dirname(__file__)
 
       flood_impact_path = os.path.join(
-         impact_data_dir, 'data', 'flood_impact_table.csv'
+         impact_data_dir, 'data', 'flood_impact_table-test.csv'
       )
 
       impact_data_lines = []
@@ -66,7 +66,7 @@ def init_flood_impact_db(engine, first_time):
       flood_maps_dir = os.path.dirname(__file__)
 
       flood_maps_path = os.path.join(
-         flood_maps_dir, 'data','flood_maps'
+         flood_maps_dir, 'data','flood_maps-test'
       )
 
       flood_map_files = None

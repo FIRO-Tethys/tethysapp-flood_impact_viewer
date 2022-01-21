@@ -1,0 +1,5 @@
+﻿country,province,region,return_period,flood_depth_m,flowrate_cms,flood_date,event,impact_method,map_method,flood_map,max_depth,agriculture_hectares,population_count,amenity_education,amenity_entertainment,amenity_facilities,amenity_financial,amenity_food,amenity_healthcare,amenity_others,amenity_public_service,amenity_transportation,amenity_waste_man
+United States,Utah,Provo,150,5,450,4/12/05,None,Python,None,fake-flood-on-Provo-River.geojson,7,25,1650,4,2,0,3,4,0,1,2,4,12
+United States,Utah,Provo,100,2,325,3/29/24,None,Python,None,fake-flood2-on-Provo-River.geojson,4,15,987,2,0,0,1,1,0,1,1,1,8
+United States,Oregon,Tilamook,50,3,340,5/5/12,None,Python,None,fake-flood-in-tilamook.geojson,6,50,450,0,0,0,1,2,0,2,3,1,2
+Germany,Rhine Land,Kordel,150,5,1200,7/27/21,Western Europe Flash Floods,Python,None,Germany_kordel_2021_flooded_vec.geojson,8,100,1780,13,23,5,17,34,24,0,26,19,40
