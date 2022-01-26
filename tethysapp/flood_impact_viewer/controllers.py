@@ -31,8 +31,8 @@ def home(request):
 
     initial_view = MVView(
         projection='EPSG:4326',
-        center=[-76.1357, -6.5724088],
-        zoom=13
+        center=[-111.77, 40.16],
+        zoom=11
     )
 
      # Define the map
@@ -115,7 +115,7 @@ def home(request):
 
     return_period_select = SelectInput (
         name='Return_Period',
-        display_text='Return Period',
+        display_text='Return Period [yrs]',
         options=returnPeriodList,
         attributes=returnPeriodsDict,
         initial='Select a Return Period',
@@ -133,7 +133,7 @@ def home(request):
 
     flow_rate_select = SelectInput (
         name='Flow_Rate',
-        display_text='Flow Rate',
+        display_text='Flow Rate [cms]',
         options=flowRateList,
         attributes=flowRateDict,
         initial='Select a Flow Rate',

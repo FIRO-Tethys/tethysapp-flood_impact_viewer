@@ -2,6 +2,42 @@ $("#form-group-Flood_Map_Type").hide();
 $("#form-group-Return_Period").hide();
 $("#form-group-Flood_Date").hide();
 $("#form-group-Flow_Rate").hide();
+// var ol_map = TETHYS_MAP_VIEW.getMap();
+// var layers = map_view.getLayers();
+
+$(document).ready(function() {
+   var map = TETHYS_MAP_VIEW.getMap();
+   var layers = map.getLayers();
+   console.log(map);
+   console.log(layers);
+   layers.forEach(layer => {
+      if(layer instanceof ol.layer.Vector){
+         if(layer['tethys_legend_title'] == 'FloodExtent 4'){
+            layer.setVisible(false);
+         }
+         console.log(layer);
+         // layer.setVisible(false);
+      }
+      // console.log(layer)
+   });
+ });
+
+//-------------------------------------------------------------------------
+// THIS IS NOT WORKING 
+// document.addEventListener("DOMContentLoaded", () =>{
+//    console.log('test')
+//    var ol_map = map_view;
+//    console.log('ol_map',ol_map)
+//    var flood_layers = document.querySelector('#map_view').dataset.layers
+//    var json_flood_layers = JSON.parse(flood_layers)
+//    var flood_maps = []
+//    for (let j = 0; j < json_flood_layers.length; j++) {
+//       console.log('test2')
+//       flood_maps[j] = JSON.stringify(flood_layers[j])
+//       document.querySelector('#map_view').dataset.layers[j] = '{}'
+//    }
+// })
+
 //-------------------------------------------------------------------------
 $('#Country').change(function() {
    var selected = $('#Country').children(':selected').text()
@@ -225,4 +261,15 @@ $('#Flood_Map_Type').change( function() {
       $("#form-group-Flood_Date").hide();
       $("#form-group-Flow_Rate").hide();
    }
+})
+
+
+function updateMap(){
+   // $('#map_view').children.empty()
+   var floodMaps = JSON.parse(document.querySelector('#map_view').dataset.layers)
+   floodMaps.layers
+}
+
+$('#Return_Period').change( function() {
+   updateMap()
 })

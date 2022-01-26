@@ -78,5 +78,8 @@
 
 {% block scripts %}
   {{ block.super }}
+  <script>
+    var map_view = "{{ map_options|safe }}";
+  </script>
   <script src="{% static 'flood_impact_viewer/js/main.js' %}" type="text/javascript"></script>
 {% endblock %}
