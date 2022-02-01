@@ -80,6 +80,7 @@ def init_flood_impact_db(engine, first_time):
 
          chazuta_flood_map = Flood_Map(
             geometry=flood_map,
+            flood_map_name=flood_map_files[i],
             map_id = i
          )
          i += 1

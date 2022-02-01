@@ -16,14 +16,14 @@ def home(request):
 
     flood_impact = session.query(Impact_Data.Agriculture_hectares, Impact_Data.Population, Impact_Data.Education_facil, Impact_Data.Entertainment_facil, Impact_Data.Financial_facil, Impact_Data.Food_facil, Impact_Data.Healthcare_facil, Impact_Data.Other_facil, Impact_Data.Public_service_amenity, Impact_Data.Transportation, Impact_Data.Waste_management_amenity).all()
 
-    flood_extents = session.query(Flood_Map.geometry, Flood_Map.id).all()
+    flood_extents = session.query(Flood_Map.geometry, Flood_Map.flood_map_name).all()
     layers = []
     for flood_extent in flood_extents:
         geojson_flood_extent = flood_extent[0]
         flood_extent_layer = MVLayer(
                 source='GeoJSON',
                 options=geojson_flood_extent,
-                legend_title='FloodExtent {0}'.format(flood_extent[1]),
+                legend_title=flood_extent[1],
                 legend_extent=[-111.74, 40.21, -111.61, 40.27],
             )
 
@@ -102,16 +102,15 @@ def home(request):
         initial='Select a Flood Map Type',
     )
 
-    provs_regs_returnPeriods = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.return_period).all()
+    provs_regs_returnPeriods = session.query(Impact_Data.province, Impact_Data.flood_mask, Impact_Data.region, Impact_Data.return_period).all()
     returnPeriodsDict = {}
     returnPeriodList = [('Select a Return Period','Select a Return Period')]
     i = 0
     for tup in provs_regs_returnPeriods:
-        if tup[2] != 'None' and tup not in returnPeriodsDict.values():
+        if tup[3] != 'None' and tup not in returnPeriodsDict.values():
             returnPeriodsDict[i] = tup
-            returnPeriodList.append((tup[2], tup[2].upper()))
+            returnPeriodList.append((tup[3], tup[3].upper()))
             i += 1
-            print(returnPeriodsDict.values())
 
     return_period_select = SelectInput (
         name='Return_Period',
@@ -121,14 +120,14 @@ def home(request):
         initial='Select a Return Period',
     )
 
-    provs_regs_flowRate = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.flow_rate_cms).all()
+    provs_regs_flowRate = session.query(Impact_Data.province, Impact_Data.flood_mask, Impact_Data.region, Impact_Data.flow_rate_cms).all()
     flowRateDict = {}
     flowRateList = [('Select a Flow Rate','Select a Flow Rate')]
     i = 0
     for tup in provs_regs_flowRate:
-        if tup[2] != 'None' and  tup not in flowRateDict.values():
+        if tup[3] != 'None' and  tup not in flowRateDict.values():
             flowRateDict[i] = tup
-            flowRateList.append((tup[2], tup[2].upper()))
+            flowRateList.append((tup[3], tup[3].upper()))
             i += 1
 
     flow_rate_select = SelectInput (
@@ -139,14 +138,14 @@ def home(request):
         initial='Select a Flow Rate',
     )
 
-    provs_regs_floodDate = session.query(Impact_Data.province, Impact_Data.region, Impact_Data.flood_date).all()
+    provs_regs_floodDate = session.query(Impact_Data.province, Impact_Data.flood_mask, Impact_Data.region, Impact_Data.flood_date).all()
     floodDateDict = {}
     floodDateList = [('Select a Flood Date','Select a Flood Date')]
     i = 0
     for tup in provs_regs_floodDate:
-        if tup[2] != 'None' and tup not in floodDateDict.values():
+        if tup[3] != 'None' and tup not in floodDateDict.values():
             floodDateDict[i] = tup
-            floodDateList.append((tup[2], tup[2].upper()))
+            floodDateList.append((tup[3], tup[3].upper()))
             i += 1
 
     flood_date_select = SelectInput (

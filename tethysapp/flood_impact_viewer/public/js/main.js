@@ -2,43 +2,17 @@ $("#form-group-Flood_Map_Type").hide();
 $("#form-group-Return_Period").hide();
 $("#form-group-Flood_Date").hide();
 $("#form-group-Flow_Rate").hide();
-// var ol_map = TETHYS_MAP_VIEW.getMap();
-// var layers = map_view.getLayers();
 
 $(document).ready(function() {
    var map = TETHYS_MAP_VIEW.getMap();
    var layers = map.getLayers();
-   console.log(map);
-   console.log(layers);
    layers.forEach(layer => {
       if(layer instanceof ol.layer.Vector){
-         if(layer['tethys_legend_title'] == 'FloodExtent 4'){
-            layer.setVisible(false);
-         }
-         console.log(layer);
-         // layer.setVisible(false);
+         layer.setVisible(false);
       }
-      // console.log(layer)
    });
  });
 
-//-------------------------------------------------------------------------
-// THIS IS NOT WORKING 
-// document.addEventListener("DOMContentLoaded", () =>{
-//    console.log('test')
-//    var ol_map = map_view;
-//    console.log('ol_map',ol_map)
-//    var flood_layers = document.querySelector('#map_view').dataset.layers
-//    var json_flood_layers = JSON.parse(flood_layers)
-//    var flood_maps = []
-//    for (let j = 0; j < json_flood_layers.length; j++) {
-//       console.log('test2')
-//       flood_maps[j] = JSON.stringify(flood_layers[j])
-//       document.querySelector('#map_view').dataset.layers[j] = '{}'
-//    }
-// })
-
-//-------------------------------------------------------------------------
 $('#Country').change(function() {
    var selected = $('#Country').children(':selected').text()
    var provAttrs = document.querySelector('#Province').attributes //provAttrs are all of the Province options (not just the ones corresponding to the selected country). provAttrs is a string-tuple (in python it was a tuple but in js its a string) like this '(<country>, <province>)'
@@ -168,7 +142,6 @@ $('#Region').change(function() {
 
 $('#Flood_Map_Type').change( function() {
    let selectedFMT = $('#Flood_Map_Type').children(':selected').text()
-   let selectedCountry = $('#Country').children(':selected').text()
    let selectedProvince = $('#Province').children(':selected').text()
    let selectedRegion = $('#Region').children(':selected').text()
 
@@ -176,12 +149,9 @@ $('#Flood_Map_Type').change( function() {
       let retPerAttrs = document.querySelector('#Return_Period').attributes
       return_periods = ["Select a Return Period"]
       for (let i = 4; i < retPerAttrs.length; i++) {
-         // console.log(retPerAttrs[i].textContent)
          if (retPerAttrs[i].value.includes(selectedProvince) && retPerAttrs[i].value.includes(selectedRegion)) {
-            // let selProvIndex = regAttrs[i].value.indexOf(selectedProvince)
             let selRegIndex = retPerAttrs[i].value.indexOf(selectedRegion)
             let retPer = retPerAttrs[i].value.slice(selRegIndex+selectedRegion.length+4, retPerAttrs[i].value.length -2)
-            // console.log(retPer)
             return_periods.push(retPer)
          };
       };
@@ -199,17 +169,15 @@ $('#Flood_Map_Type').change( function() {
       $("#form-group-Return_Period").show();
       $("#form-group-Flood_Date").hide();
       $("#form-group-Flow_Rate").hide();
+      hideFloodMap();
    }
    else if (selectedFMT === 'Flow Rate') {
       let flowRateAttrs = document.querySelector('#Flow_Rate').attributes
       flow_rates = ["Select a Flow Rate"]
       for (let i = 4; i < flowRateAttrs.length; i++) {
-         console.log(flowRateAttrs[i].textContent)
          if (flowRateAttrs[i].value.includes(selectedProvince) && flowRateAttrs[i].value.includes(selectedRegion)) {
-            // let selProvIndex = regAttrs[i].value.indexOf(selectedProvince)
             let selRegIndex = flowRateAttrs[i].value.indexOf(selectedRegion)
             let flowRate = flowRateAttrs[i].value.slice(selRegIndex+selectedRegion.length+4, flowRateAttrs[i].value.length -2)
-            // console.log(retPer)
             flow_rates.push(flowRate)
          };
       };
@@ -227,17 +195,15 @@ $('#Flood_Map_Type').change( function() {
       $("#form-group-Flow_Rate").show();
       $("#form-group-Return_Period").hide();
       $("#form-group-Flood_Date").hide();
+      hideFloodMap();
    }
    else if (selectedFMT === 'Flood Date') {
       let floodDateAttrs = document.querySelector('#Flood_Date').attributes
       flood_dates = ["Select a Flood Date"]
       for (let i = 4; i < floodDateAttrs.length; i++) {
-         console.log(floodDateAttrs[i].textContent)
          if (floodDateAttrs[i].value.includes(selectedProvince) && floodDateAttrs[i].value.includes(selectedRegion)) {
-            // let selProvIndex = regAttrs[i].value.indexOf(selectedProvince)
             let selRegIndex = floodDateAttrs[i].value.indexOf(selectedRegion)
             let floodDate = floodDateAttrs[i].value.slice(selRegIndex+selectedRegion.length+4, floodDateAttrs[i].value.length -2)
-            // console.log(retPer)
             flood_dates.push(floodDate)
          };
       };
@@ -255,17 +221,57 @@ $('#Flood_Map_Type').change( function() {
       $("#form-group-Flood_Date").show();
       $("#form-group-Return_Period").hide();
       $("#form-group-Flow_Rate").hide();
+      hideFloodMap();
    }
    else {
       $("#form-group-Return_Period").hide();
       $("#form-group-Flood_Date").hide();
       $("#form-group-Flow_Rate").hide();
+      hideFloodMap();
    }
 })
 
+$('#Return_Period').change(function() {
+   let selectedReturnPer = $('#Return_Period').children(':selected').text()
+   hideMaps_showMap(selectedReturnPer);
+})
+
+$('#Flow_Rate').change(function() {
+   let selectedFlowRate = $('#Flow_Rate').children(':selected').text()
+   hideMaps_showMap(selectedFlowRate);
+})
+
+$('#Flood_Date').change(function() {
+   let selectedFloodDate = $('#Flood_Date').children(':selected').text()
+   hideMaps_showMap(selectedFloodDate);
+})
+
+function hideFloodMap(){
+   var map = TETHYS_MAP_VIEW.getMap();
+   var layers = map.getLayers();
+   layers.forEach(layer => {
+      if(layer instanceof ol.layer.Vector){
+         layer.setVisible(false);
+      }
+   });
+}
+
+function hideMaps_showMap(selected){
+   var map = TETHYS_MAP_VIEW.getMap();
+   var layers = map.getLayers();
+   layers.forEach(layer => {
+      if(layer instanceof ol.layer.Vector){
+         if(layer['tethys_legend_title'].includes(selected)){
+            layer.setVisible(true);
+         }
+         else{
+            layer.setVisible(false);
+         }
+      }
+   });   
+}
 
 function updateMap(){
-   // $('#map_view').children.empty()
    var floodMaps = JSON.parse(document.querySelector('#map_view').dataset.layers)
    floodMaps.layers
 }

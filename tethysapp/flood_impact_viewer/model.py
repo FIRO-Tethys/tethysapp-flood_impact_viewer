@@ -72,8 +72,10 @@ class Flood_Map(Base):
 
    id = Column(Integer, primary_key=True)
    geometry = Column(JSON)
+   flood_map_name = Column(String, nullable=False)
    map_id = Column(Integer)
 
-   def __init__(self, geometry, map_id):
+   def __init__(self, geometry, flood_map_name, map_id):
       self.geometry = geometry
+      self.flood_map_name = flood_map_name
       self.map_id = map_id
