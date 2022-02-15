@@ -234,6 +234,18 @@ $('#Flood_Map_Type').change( function() {
 $('#Return_Period').change(function() {
    let selectedReturnPer = $('#Return_Period').children(':selected').text()
    hideMaps_showMap(selectedReturnPer);
+   let floodMapsAttrs = document.querySelector('#Return_Period').attributes;
+   for (let i=4; i < floodMapsAttrs.length; i++){
+      if(floodMapsAttrs[i].value.includes($('#Province').val()) && 
+      floodMapsAttrs[i].value.includes($('#Region').val()) &&
+      floodMapsAttrs[i].value.includes($('#Return_Period').val())){
+         startIndx = $('#Province').val().length + 6
+         endIndx = floodMapsAttrs[i].value.length - ($('#Region').val().length + $('#Return_Period').val().length + 10)
+         flood_map = floodMapsAttrs[i].value.slice(startIndx, endIndx)
+         centerOnFloodExtent(flood_map)
+      }
+   }
+   // update_flood_impact_table(selectedReturnPer)
 })
 
 $('#Flow_Rate').change(function() {
@@ -270,6 +282,50 @@ function hideMaps_showMap(selected){
       }
    });   
 }
+
+function centerOnFloodExtent(selected){
+   var flood_layers = document.querySelector('#map_view').dataset.layers; // flood_layers is a string until make it a json in the next line
+   var json_flood_layers = JSON.parse(flood_layers);
+   var coords = []
+   for (let i = 0; i < json_flood_layers.length; i++){
+      if(json_flood_layers[i].legend_title == selected){
+         var flood_map = JSON.parse(json_flood_layers[i].options);
+         coords.push(flood_map.features[0].geometry.coordinates[0]);
+         var poly = new ol.geom.Polygon(coords);
+         TETHYS_MAP_VIEW.zoomToExtent(poly.getExtent());
+      }
+   }
+}
+
+function convert_str_to_array(string){
+   // STRING SHOULD NOT HAVE OUTSIDE [ ] ON THE LIST
+   coord_arr = [];
+   for (let i=0;i<string.length;i++){
+      if(string[i] == '['){
+         coord_arr.push(string[i]);
+         while(string[i] != ']'){
+            coord_arr.push(string[i]);
+         }
+         coord_arr.push(string[i]);
+      }
+   }
+   console.log(coord_arr)
+   return coord_arr
+}
+
+function update_flood_impact_table(selected){
+   children = document.querySelector('tbody').children
+   for (let i=0; i<children.length; i++){
+      console.log('DEBUG', children[i])
+      
+   }
+}
+// $(function() { //wait for page to load
+
+//    var extent = [-109.49945001309617, 37.58047995600726, -109.44540360290348, 37.679502621605735];
+//    TETHYS_MAP_VIEW.zoomToExtent(extent);
+// });
+
 
 function updateMap(){
    var floodMaps = JSON.parse(document.querySelector('#map_view').dataset.layers)

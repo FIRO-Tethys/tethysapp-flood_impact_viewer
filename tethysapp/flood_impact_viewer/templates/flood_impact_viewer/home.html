@@ -41,20 +41,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{flood_impact.0.0}}</td>
-          <td>{{flood_impact.0.1}}</td>
-          <td>{{flood_impact.0.2}}</td>
-          <td>{{flood_impact.0.3}}</td>
-          <td>{{flood_impact.0.4}}</td>
-          <td>{{flood_impact.0.5}}</td>
-          <td>{{flood_impact.0.6}}</td>
-          <td>{{flood_impact.0.7}}</td>
-          <td>{{flood_impact.0.8}}</td>
-          <td>{{flood_impact.0.9}}</td>
-          <td>{{flood_impact.0.10}}</td>
-          <td>{{flood_impact.0.11}}</td>
-        </tr>
+        {% for row in flood_impact%}
+          <tr>
+            <td>{{row.0}}</td>
+            <td>{{row.1}}</td>
+            <td>{{row.2}}</td>
+            <td>{{row.3}}</td>
+            <td>{{row.4}}</td>
+            <td>{{row.5}}</td>
+            <td>{{row.6}}</td>
+            <td>{{row.7}}</td>
+            <td>{{row.8}}</td>
+            <td>{{row.9}}</td>
+            <td>{{row.10}}</td>
+            <td>{{row.11}}</td>
+            <td>{{row.12}}</td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
