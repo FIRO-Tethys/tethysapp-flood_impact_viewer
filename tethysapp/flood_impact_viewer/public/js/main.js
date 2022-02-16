@@ -251,11 +251,33 @@ $('#Return_Period').change(function() {
 $('#Flow_Rate').change(function() {
    let selectedFlowRate = $('#Flow_Rate').children(':selected').text()
    hideMaps_showMap(selectedFlowRate);
+   let flowRatesAttrs = document.querySelector('#Flow_Rate').attributes;
+   for (let i=4; i < flowRatesAttrs.length; i++){
+      if(flowRatesAttrs[i].value.includes($('#Province').val()) && 
+      flowRatesAttrs[i].value.includes($('#Region').val()) &&
+      flowRatesAttrs[i].value.includes($('#Flow_Rate').val())){
+         startIndx = $('#Province').val().length + 6
+         endIndx = flowRatesAttrs[i].value.length - ($('#Region').val().length + $('#Flow_Rate').val().length + 10)
+         flood_map = flowRatesAttrs[i].value.slice(startIndx, endIndx)
+         centerOnFloodExtent(flood_map)
+      }
+   }
 })
 
 $('#Flood_Date').change(function() {
    let selectedFloodDate = $('#Flood_Date').children(':selected').text()
    hideMaps_showMap(selectedFloodDate);
+   let floodDatesAttrs = document.querySelector('#Flood_Date').attributes;
+   for (let i=4; i < floodDatesAttrs.length; i++){
+      if(floodDatesAttrs[i].value.includes($('#Province').val()) && 
+      floodDatesAttrs[i].value.includes($('#Region').val()) &&
+      floodDatesAttrs[i].value.includes($('#Flood_Date').val())){
+         startIndx = $('#Province').val().length + 6
+         endIndx = floodDatesAttrs[i].value.length - ($('#Region').val().length + $('#Flood_Date').val().length + 10)
+         flood_map = floodDatesAttrs[i].value.slice(startIndx, endIndx)
+         centerOnFloodExtent(flood_map)
+      }
+   }
 })
 
 function hideFloodMap(){
