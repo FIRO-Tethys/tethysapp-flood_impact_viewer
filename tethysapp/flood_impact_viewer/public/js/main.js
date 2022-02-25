@@ -10,6 +10,7 @@ $(document).ready(function() {
 
    var map = TETHYS_MAP_VIEW.getMap();
    var layers = map.getLayers();
+   // set all the floods maps to hidden
    layers.forEach(layer => {
       if(layer instanceof ol.layer.Vector){
          layer.setVisible(false);
@@ -63,15 +64,19 @@ $(document).ready(function() {
 
    $('#Province').change(function() {
       let selectedProvince = $('#Province').children(':selected').text();
+      // regAttrs is a js string '(<Province>,<Region>)'
       let regAttrs = document.querySelector('#Region').attributes;
+      // set the initial option for regions  as 'Select a Region'
       regions = ["Select a Region"];
       for (let i = 4; i < regAttrs.length; i++) {
+         // add to regions list the regions that are in the selected province
          if (regAttrs[i].value.includes(selectedProvince)) {
             let selIndex = regAttrs[i].value.indexOf(selectedProvince);
             let reg = regAttrs[i].value.slice(selIndex+selectedProvince.length+4, regAttrs[i].value.length -2);
             regions.push(reg);
          };
       };
+      // empty the options from Region dropdown
       $('#Region').empty();
 
       $.each(regions, function (index, value) {
@@ -82,7 +87,7 @@ $(document).ready(function() {
       });
       let selected_option = $("#Region").val();
       $("#select2-Region-container").html(selected_option);
-   
+      // if the selected option for province is the default, then hide its children dropdowns
       if (selectedProvince === 'Select a Province') {
          $('#form-group-Region').hide();
          $("#form-group-Flood_Map_Type").hide();
@@ -90,6 +95,7 @@ $(document).ready(function() {
          $("#form-group-Flood_Date").hide();
          $("#form-group-Flow_Rate").hide();
       }
+      // after a province is selected, show the region dropdown
       else {
          $('#form-group-Region').show();
          $("#form-group-Flood_Map_Type").hide();
@@ -110,6 +116,7 @@ $(document).ready(function() {
          $("#form-group-Flow_Rate").hide();
       }
       else {
+         // fmtOpts (flood map type options)
          fmtOpts = ['Select a Flood Map Type'];
          let fmtChildren = document.querySelector('#Flood_Map_Type').children;
          for (let i = 0; i < fmtChildren.length; i++){
@@ -250,7 +257,7 @@ $(document).ready(function() {
             centerOnFloodExtent(flood_map);
          }
       }
-
+      // if a flood map has been selected (I.e. this is the second, third, etc. map to be selected)
       if (flood_map_selected){
          reset_impact_table_visibility(prev_flood_map_indx);
       }
@@ -274,7 +281,7 @@ $(document).ready(function() {
             centerOnFloodExtent(flood_map);
          }
       }
-
+      // if a flood map has been selected (I.e. this is the second, third, etc. map to be selected)
       if (flood_map_selected){
          reset_impact_table_visibility(prev_flood_map_indx)
       }
@@ -299,7 +306,7 @@ $(document).ready(function() {
             centerOnFloodExtent(flood_map);
          }
       }
-
+      // if a flood map has been selected (I.e. this is the second, third, etc. map to be selected)
       if (flood_map_selected){
          reset_impact_table_visibility(prev_flood_map_indx)
       }
@@ -382,19 +389,3 @@ function reset_impact_table_visibility(previous_flood_map_indx){
    }
 }
 //-----------------------End Helper Functions----------------------
-
-// // $(function() { //wait for page to load
-
-// //    var extent = [-109.49945001309617, 37.58047995600726, -109.44540360290348, 37.679502621605735];
-// //    TETHYS_MAP_VIEW.zoomToExtent(extent);
-// // });
-
-
-// function updateMap(){
-//    var floodMaps = JSON.parse(document.querySelector('#map_view').dataset.layers);
-//    floodMaps.layers;
-// }
-
-// $('#Return_Period').change( function() {
-//    updateMap()
-// })
