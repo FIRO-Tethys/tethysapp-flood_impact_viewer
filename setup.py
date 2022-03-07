@@ -16,12 +16,12 @@ resource_files += find_resource_files('tethysapp/' + app_package + '/workspaces'
 
 setup(
     name=release_package,
-    version='0.0.1',
-    description='',
+    version='1.0.0',
+    description='This app is a viewer app. It displays flood maps and their corresponding imapct statistics tables.',
     long_description='',
-    keywords='',
-    author='',
-    author_email='',
+    keywords=('flood','flood impact','flood damages','flooded areas'),
+    author='Travis Tyler',
+    author_email='travis.tyler8957@gmail.com',
     url='',
     license='',
     packages=find_namespace_packages(),

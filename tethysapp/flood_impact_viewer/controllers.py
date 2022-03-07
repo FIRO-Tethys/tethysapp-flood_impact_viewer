@@ -29,11 +29,11 @@ def home(request):
 
         layers.append(flood_extent_layer)
 
-    initial_view = MVView(
-        projection='EPSG:4326',
-        center=[-111.77, 40.16],
-        zoom=11
-    )
+    # initial_view = MVView(
+    #     projection='EPSG:4326',
+    #     center=[0, 0],
+    #     zoom=80
+    # )
 
      # Define the map
     map_options = MapView(
@@ -42,7 +42,7 @@ def home(request):
         controls=[{'MousePosition': {'projection': 'EPSG:4326'}}],
         layers=layers,
         basemap='OpenStreetMap',
-        view=initial_view,
+        # view=initial_view,
         legend=True
     )
 
