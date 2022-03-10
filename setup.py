@@ -19,7 +19,7 @@ setup(
     version='1.0.0',
     description='This app is a viewer app. It displays flood maps and their corresponding imapct statistics tables.',
     long_description='',
-    keywords=('flood','flood impact','flood damages','flooded areas'),
+    keywords=['flood','flood impact','flood damages','flooded areas'],
     author='Travis Tyler',
     author_email='travis.tyler8957@gmail.com',
     url='',
