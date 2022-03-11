@@ -1,0 +1,10 @@
+country,province,region,return_period,flood_depth_m,flowrate_cms,flood_date,event,impact_method,map_method,flood_map,max_depth,agriculture_hectares,population_count,amenity_education,amenity_entertainment,amenity_facilities,amenity_financial,amenity_food,amenity_healthcare,amenity_others,amenity_public_service,amenity_transportation,amenity_waste_man
+Peru,San Martin,Chazuta,None,10,None,None,None,ArcGIS Pro,1,Chazuta_HAND_10m.shp,None,44.1,2121,17,1,0,0,0,3,1,1,1,0
+Peru,San Martin,Chazuta,None,10,None,None,None,QGIS,1,Chazuta_HAND_10m.shp,None,44.1,2175,17,1,0,0,0,3,1,1,1,0
+Peru,San Martin,Chazuta,None,10,None,None,None,Python,1,Chazuta_HAND_10m.shp,None,44.19,2264,17,1,0,0,0,3,1,1,1,0
+Colombia,Guainia,Inirida,None,None,10786,8/10/18,None,ArcGIS Pro,3,Inirida_crs_10Aug18_SRH2D.shp,None,88.38,8222,0,0,0,0,0,0,0,1,1,0
+Colombia,Guainia,Inirida,None,None,10786,8/10/18,None,QGIS,3,Inirida_crs_10Aug18_SRH2D.shp,None,88.38,8267,0,0,0,0,0,0,0,1,1,0
+Colombia,Guainia,Inirida,None,None,10786,8/10/18,None,Python,3,Inirida_crs_10Aug18_SRH2D.shp,None,88.2,9109,0,0,0,0,0,0,0,1,1,0
+Thailand,Nakhon Sawan,Krok Phra,None,None,None,10/3/21,Tropical Storm Dianmu,ArcGIS Pro,2,fld_ply_thai.shp,None,8595.18,3348,0,0,0,0,1,0,2,0,1,0
+Thailand,Nakhon Sawan,Krok Phra,None,None,None,10/3/21,Tropical Storm Dianmu,QGIS,2,fld_ply_thai.shp,None,8591.04,3441,0,0,0,0,1,0,2,0,1,0
+Thailand,Nakhon Sawan,Krok Phra,None,None,None,10/3/21,Tropical Storm Dianmu,Python,2,fld_ply_thai.shp,None,8763.21,3345,0,0,0,0,1,0,2,0,1,0

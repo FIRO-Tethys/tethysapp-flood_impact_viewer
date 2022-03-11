@@ -17,7 +17,8 @@ def init_flood_impact_db(engine, first_time):
       session = Session()
 
       #Find the path of parent directory relative to this file
-      impact_data_dir = os.path.dirname(__file__)
+      # impact_data_dir = os.path.dirname(__file__)
+      impact_data_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'workspaces', 'app_workspace')
 
       flood_impact_path = os.path.join(
          impact_data_dir, 'data', 'flood_impact_table-test.csv'
@@ -63,7 +64,8 @@ def init_flood_impact_db(engine, first_time):
          #ADD THE DATA TO THE DATABASE
          session.add(impact_data)
       #-----------------FLOOD MAP------------------------------
-      flood_maps_dir = os.path.dirname(__file__)
+      # flood_maps_dir = os.path.dirname(__file__)
+      flood_maps_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'workspaces', 'app_workspace')
 
       flood_maps_path = os.path.join(
          flood_maps_dir, 'data','flood_maps-test'
