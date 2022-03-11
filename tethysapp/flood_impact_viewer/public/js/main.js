@@ -6,6 +6,7 @@ $(document).ready(function() {
    console.log("hola");
    $("#Country").parent().attr('id',"form-group-Country");
    $("#Province").parent().attr('id',"form-group-Province");
+   $("#Region").parent().attr('id',"form-group-Region");
    $("#Flood_Map_Type").parent().attr('id',"form-group-Flood_Map_Type");
    $("#Return_Period").parent().attr('id',"form-group-Return_Period");
    $("#Flow_Rate").parent().attr('id',"form-group-Flow_Rate");
