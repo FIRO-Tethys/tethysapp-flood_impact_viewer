@@ -3,13 +3,13 @@ var flood_map_selected = false
 var prev_flood_map_indx
 
 $(document).ready(function() {
-
-   $("Country").parent().parent().attr('id',"form-group-Country");
-   $("Province").parent().parent().attr('id',"form-group-Province");
-   $("Flood_Map_Type").parent().parent().attr('id',"form-group-Flood_Map_Type");
-   $("Return_Period").parent().parent().attr('id',"form-group-Return_Period");
-   $("Flow_Rate").parent().parent().attr('id',"form-group-Flow_Rate");
-   $("Flood_Date").parent().parent().attr('id',"form-group-Flood_Date");
+   console.log("hola");
+   $("#Country").parent().attr('id',"form-group-Country");
+   $("#Province").parent().attr('id',"form-group-Province");
+   $("#Flood_Map_Type").parent().attr('id',"form-group-Flood_Map_Type");
+   $("#Return_Period").parent().attr('id',"form-group-Return_Period");
+   $("#Flow_Rate").parent().attr('id',"form-group-Flow_Rate");
+   $("#Flood_Date").parent().attr('id',"form-group-Flood_Date");
 
 
 
