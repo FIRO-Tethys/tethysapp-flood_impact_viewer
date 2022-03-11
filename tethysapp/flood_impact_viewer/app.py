@@ -8,7 +8,7 @@ class FloodImpactViewer(TethysAppBase):
 
     name = 'Flood Impact Viewer'
     index = 'flood_impact_viewer:home'
-    icon = 'flood_impact_viewer/images/icon.gif'
+    icon = 'flood_impact_viewer/images/flood.svg'
     package = 'flood_impact_viewer'
     root_url = 'flood-impact-viewer'
     color = '#16a085'
