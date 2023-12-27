@@ -8,8 +8,8 @@ package:
 about:
   author: {{ data.get('author')}}
   description: {{ data.get('description')}}
-  license: "{'name': 'release_package', 'version': '1.0.0', 'description': 'This app is a viewer app. It displays flood maps and their corresponding imapct statistics tables.', 'long_description': '', 'author': 'Travis Tyler', 'author_email': 'travis.tyler8957@gmail.com', 'url': '', 'license': ''}"
-  dev_url: {{ data.get('url') }}
+  license: "{'name': 'release_package', 'version': '1.0.0', 'description': 'This app is a viewer app. It displays flood maps and their corresponding imapct statistics tables.', 'long_description': '', 'author': 'Travis Tyler', 'author_email': 'travis.tyler8957@gmail.com', 'url': '', 'license': '', 'app_package': 'flood_impact_viewer', 'tethys_version': '<=3.4.4', 'dev_url': 'https://github.com/tethysapp/tethysapp-flood_impact_viewer'}"
+  dev_url: {{ data.get('dev_url') }}
 
 outputs:
   - name: {{ name }}
